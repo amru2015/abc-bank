@@ -4,11 +4,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateProvider {
-    private static DateProvider instance = null;
+	//Added Volatile keyword to prevent threads caching
+    private volatile static DateProvider instance = null;
 
+    // Implemented Singleton design pattern using double checked locking mechanism
     public static DateProvider getInstance() {
-        if (instance == null)
-            instance = new DateProvider();
+        if (instance == null){
+        	synchronized(DateProvider.class){
+        		if(instance == null){
+                    instance = new DateProvider();
+        		}
+        	}
+        }
         return instance;
     }
 
