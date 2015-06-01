@@ -33,11 +33,15 @@ public class Bank {
             total += c.totalInterestEarned();
         return total;
     }
-
+ // Added Null check
     public String getFirstCustomer() {
         try {
-            customers = null;
-            return customers.get(0).getName();
+        	String name = "";
+        	if(customers != null && customers.get(0) != null){
+        	  name = customers.get(0).getName();	
+        	}
+        	return name;
+              
         } catch (Exception e){
             e.printStackTrace();
             return "Error";
