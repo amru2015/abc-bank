@@ -62,14 +62,16 @@ public class Customer {
                 break;
         }
 
-        //Now total up all the transactions
+        //Used StringBuffer to prevent the multiple string objects from being created in the loop.
+        StringBuffer sb =new StringBuffer(s);
+        
         double total = 0.0;
         for (Transaction t : a.transactions) {
-            s += "  " + (t.amount < 0 ? "withdrawal" : "deposit") + " " + toDollars(t.amount) + "\n";
+            sb.append( "  " + (t.amount < 0 ? "withdrawal" : "deposit") + " " + toDollars(t.amount) + "\n");
             total += t.amount;
         }
-        s += "Total " + toDollars(total);
-        return s;
+       return sb.append("Total " + toDollars(total)).toString();
+        
     }
 
     private String toDollars(double d){
